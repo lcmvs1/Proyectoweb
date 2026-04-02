@@ -1,0 +1,94 @@
+<%- include('../partials/navbar') %>
+
+  <div class="container mt-4">
+
+    <h2 class="mb-4 text-success fw-bold">
+      Gestión de Canchas
+    </h2>
+
+    <!-- FORMULARIO -->
+    <div class="card shadow-lg mb-4 p-3">
+      <div class="card-body">
+
+        <h5 class="card-title mb-3">Agregar Nueva Cancha</h5>
+
+        <form action="/admin/canchas" method="POST">
+
+          <div class="row">
+
+            <div class="col-md-4 mb-3">
+              <input type="text" name="nombre" class="form-control" placeholder="Nombre de la cancha" required>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <input type="number" name="precio_por_hora" class="form-control" placeholder="Precio Bs" required>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <select name="tipo_id" class="form-select">
+                <% tipos.forEach(tipo=> { %>
+                  <option value="<%= tipo.id %>">
+                    <%= tipo.nombre %>
+                  </option>
+                  <% }) %>
+              </select>
+            </div>
+
+            <div class="col-md-2 mb-3">
+              <button class="btn btn-success px-3 py-2 rounded-pill">
+                Agregar
+              </button>
+            </div>
+
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+    <!-- TABLA -->
+    <div class="card shadow">
+      <div class="card-body">
+
+        <h5 class="card-title mb-3">Listado de Canchas</h5>
+
+        <table class="table table-striped table-hover">
+
+          <thead class="table-dark">
+            <tr>
+              <th>Nombre</th>
+              <th>Tipo</th>
+              <th>Precio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% canchas.forEach(cancha=> { %>
+              <tr>
+                <td>
+                  <%= cancha.nombre %>
+                </td>
+                <td>
+                  <%= cancha.TipoCancha.nombre %>
+                </td>
+                <td><strong>
+                    <%= cancha.precio_por_hora %> Bs
+                  </strong></td>
+
+                <td>
+                  <button class="btn btn-danger btn-sm">
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+              <% }) %>
+          </tbody>
+
+        </table>
+
+      </div>
+    </div>
+
+  </div>

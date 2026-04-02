@@ -1,0 +1,200 @@
+<%- include('../partials/navbar') %>
+
+  <div class="container mt-4">
+
+    <h2 class="text-success mb-4">Horarios</h2>
+
+    <% if (typeof cancha !=='undefined' ) { %>
+      <h5 class="text-muted">Cancha: <%= cancha.nombre %>
+      </h5>
+      <% } %>
+
+        <!-- 🔥 FORM SOLO ADMIN -->
+        <% if (usuario?.rol==='admin' ) { %>
+
+          <div class="card p-4 mb-4 shadow-sm mx-auto" style="max-width: 900px;">
+
+            <form action="/horarios" method="POST" class="row g-3">
+
+              <div class="col-md-3">
+                <label>Cancha</label>
+                <select name="cancha_id" class="form-select" required>
+                  <% canchas.forEach(c=> { %>
+                    <option value="<%= c.id %>">
+                      <%= c.nombre %>
+                    </option>
+                    <% }) %>
+                </select>
+              </div>
+
+              <div class="col-md-3">
+                <label>Fecha</label>
+                <input type="date" name="fecha" class="form-control" required>
+              </div>
+
+              <div class="col-md-2">
+                <label>Inicio</label>
+                <input type="time" name="hora_inicio" class="form-control" required>
+              </div>
+
+              <div class="col-md-2">
+                <label>Fin</label>
+                <input type="time" name="hora_fin" class="form-control" required>
+              </div>
+
+              <div class="col-md-2 d-flex align-items-end">
+                <button class="btn btn-success w-100">+ Crear</button>
+              </div>
+
+            </form>
+
+          </div>
+
+          <% } %>
+
+            <!-- 🔍 BUSCADOR SOLO CLIENTE -->
+            <% if (usuario?.rol==='cliente' ) { %>
+
+              <div class="card p-3 mb-4 shadow-sm">
+                <form method="GET" action="" class="row g-3">
+
+                  <div class="col-md-4">
+                    <label>Buscar por fecha</label>
+                    <input type="date" name="fecha" class="form-control" value="<%= fecha || '' %>" required>
+                  </div>
+
+                  <div class="col-md-2 d-flex align-items-end">
+                    <button class="btn btn-primary w-100">Buscar</button>
+                  </div>
+
+                </form>
+              </div>
+
+              <% } %>
+
+                <!-- TABLA -->
+                <div class="card p-3 shadow-sm">
+
+                  <table class="table table-hover">
+                    <thead class="table-dark">
+                      <tr>
+                        <th>Cancha</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Estado</th>
+
+                        <% if (usuario?.rol==='admin' ) { %>
+                          <th>Eliminar</th>
+                          <% } %>
+
+                            <th>Acciones</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <% horarios.forEach(h=> { %>
+                        <tr>
+
+                          <td>
+                            <%= h.Cancha?.nombre %>
+                          </td>
+                          <td>
+                            <%= h.fecha %>
+                          </td>
+                          <td>
+                            <%= h.hora_inicio %> - <%= h.hora_fin %>
+                          </td>
+
+                          <td>
+                            <% if (h.disponible) { %>
+                              <span class="badge bg-success">Disponible</span>
+                              <% } else { %>
+                                <span class="badge bg-danger">Ocupado</span>
+                                <% } %>
+                          </td>
+
+                          <!-- ADMIN -->
+                          <% if (usuario?.rol==='admin' ) { %>
+                            <td>
+                              <form action="/admin/horarios/eliminar/<%= h.id %>" method="POST">
+                                <button class="btn btn-danger btn-sm">Eliminar</button>
+                              </form>
+                            </td>
+                            <% } %>
+
+                              <!-- CLIENTE -->
+                              <td>
+
+                                <% if (h.disponible && usuario?.rol==='cliente' ) { %>
+
+                                  <form action="/reservar/<%= h.id %>" method="POST">
+                                    <button class="btn btn-success btn-sm">Reservar</button>
+                                  </form>
+
+                                  <% } else if (h.Reserva && h.Reserva.estado==='confirmada' && usuario?.rol==='cliente'
+                                    ) { %>
+
+                                    <!-- CANCELAR -->
+                                    <form action="/cancelar-reserva/<%= h.Reserva.id %>" method="POST">
+                                      <button class="btn btn-warning btn-sm">Cancelar</button>
+                                    </form>
+
+                                    <!-- RESEÑA -->
+                                    <% if (!h.Reserva.Resena) { %>
+
+                                      <form action="/resena" method="POST" class="mt-2">
+
+                                        <input type="hidden" name="cancha_id" value="<%= h.cancha_id %>">
+                                        <input type="hidden" name="reserva_id" value="<%= h.Reserva.id %>">
+
+                                        <select name="calificacion" class="form-select form-select-sm mb-1" required>
+                                          <option value="">Calificación</option>
+                                          <option value="5">⭐⭐⭐⭐⭐</option>
+                                          <option value="4">⭐⭐⭐⭐</option>
+                                          <option value="3">⭐⭐⭐</option>
+                                          <option value="2">⭐⭐</option>
+                                          <option value="1">⭐</option>
+                                        </select>
+
+                                        <input type="text" name="comentario" class="form-control form-control-sm mb-1"
+                                          placeholder="Comentario...">
+
+                                        <button class="btn btn-pink btn-sm w-100">
+                                          Enviar Reseña
+                                        </button>
+
+                                      </form>
+
+                                      <% } else { %>
+
+                                        <div class="mt-2 p-2 rounded" style="background:#111; font-size: 13px;">
+                                          <strong style="color:#a3e635;">
+                                            <%= h.Reserva.Resena.Usuario?.nombre %>
+                                          </strong>
+
+                                          <span>⭐ <%= h.Reserva.Resena.calificacion %>/5</span>
+
+                                          <p class="mb-0 text-light">
+                                            "<%= h.Reserva.Resena.comentario %>"
+                                          </p>
+                                        </div>
+
+                                        <% } %>
+
+                                          <% } else { %>
+
+                                            <span class="badge bg-secondary">No disponible</span>
+
+                                            <% } %>
+
+                              </td>
+
+                        </tr>
+                        <% }) %>
+                    </tbody>
+
+                  </table>
+
+                </div>
+
+  </div>

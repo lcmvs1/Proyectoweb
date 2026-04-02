@@ -1,0 +1,20 @@
+<%- include('partials/navbar') %>
+<link rel="icon" href="/img/logo.png">
+<div class="container mt-4">
+
+  <h1>Panel de Control</h1>
+
+  <% if (usuario && usuario.nombre) { %>
+    <p>
+      ¡Hola, <strong><%= usuario.nombre %></strong>!
+      Has iniciado sesión como <strong><%= usuario.rol %></strong>.
+    </p>
+  <% } else { %>
+    <p>Bienvenido. Por favor <a href="/login">Inicia sesión</a>.</p>
+  <% } %>
+
+  <hr>
+
+  <a href="/salir">Cerrar Sesión Segura</a>
+
+</div>

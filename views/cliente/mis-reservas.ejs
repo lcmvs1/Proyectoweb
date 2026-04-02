@@ -1,0 +1,127 @@
+<%- include('../partials/navbar') %>
+
+    <div class="container mt-4">
+
+        <!-- 🔔 ALERTAS -->
+        <% if (query && query.error) { %>
+            <div class="alert alert-danger">
+                <%= query.error %>
+            </div>
+            <% } %>
+
+                <% if (query && query.ok) { %>
+                    <div class="alert alert-success">
+                        <%= query.ok %>
+                    </div>
+                    <% } %>
+
+                        <h2 class="titulo">Mis Reservas</h2>
+
+                        <table class="tabla-reservas">
+                            <thead>
+                                <tr>
+                                    <th>Cancha</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% reservas.forEach(reserva=> { %>
+                                    <tr>
+
+                                        <td>
+                                            <%= reserva.Horario.Cancha.nombre %>
+                                        </td>
+
+                                        <td>
+                                            <%= reserva.Horario.fecha %>
+                                        </td>
+
+                                        <td>
+                                            <%= reserva.Horario.hora_inicio %> -
+                                                <%= reserva.Horario.hora_fin %>
+                                        </td>
+
+                                        <td>
+                                            <span class="estado <%= reserva.estado %>">
+                                                <%= reserva.estado || 'confirmada' %>
+                                            </span>
+                                        </td>
+
+                                        <td class="acciones">
+
+                                            <!-- CANCELAR -->
+                                            <form action="/reserva/cancelar/<%= reserva.id %>" method="POST">
+                                                <button class="btn cancelar">Cancelar</button>
+                                            </form>
+
+                                            <!-- RESEÑA -->
+                                            <% if (reserva.estado==='confirmada' ) { %>
+
+                                                <% if (!reserva.Resena) { %>
+
+                                                    <!-- FORMULARIO -->
+                                                    <form action="/resena" method="POST" class="mt-2">
+
+                                                        <input type="hidden" name="cancha_id"
+                                                            value="<%= reserva.Horario.cancha_id %>">
+                                                        <input type="hidden" name="reserva_id"
+                                                            value="<%= reserva.id %>">
+
+                                                        <select name="calificacion" class="form-control mb-1" required>
+                                                            <option value="">Calificación</option>
+                                                            <option value="5">⭐⭐⭐⭐⭐</option>
+                                                            <option value="4">⭐⭐⭐⭐</option>
+                                                            <option value="3">⭐⭐⭐</option>
+                                                            <option value="2">⭐⭐</option>
+                                                            <option value="1">⭐</option>
+                                                        </select>
+
+                                                        <input type="text" name="comentario" class="form-control mb-1"
+                                                            placeholder="Comentario...">
+
+                                                        <button class="btn btn-info w-100">
+                                                            Enviar Reseña
+                                                        </button>
+
+                                                    </form>
+
+                                                    <% } else { %>
+
+                                                        <!-- MOSTRAR RESEÑA -->
+                                                        <div class="mt-2 p-2 rounded"
+                                                            style="background:#111; font-size: 13px;">
+
+                                                            <strong style="color:#a3e635;">
+                                                                <%= reserva.Resena.Usuario?.nombre %>
+                                                            </strong>
+
+                                                            <span>
+                                                                ⭐ <%= reserva.Resena.calificacion %>/5
+                                                            </span>
+
+                                                            <p class="mb-0 text-light">
+                                                                "<%= reserva.Resena.comentario %>"
+                                                            </p>
+
+                                                        </div>
+
+                                                        <% } %>
+
+                                                            <% } else { %>
+
+                                                                <span class="badge bg-secondary">No disponible</span>
+
+                                                                <% } %>
+
+                                        </td>
+
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+
+    </div>
