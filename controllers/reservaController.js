@@ -2,7 +2,7 @@ const Reserva = require('../models/Reserva');
 const Horario = require('../models/Horario');
 const Resena = require('../models/Resena');
 
-// 🔥 RESERVAR
+//  RESERVAR
 exports.reservar = async (req, res) => {
   try {
     const usuario_id = req.session.usuarioId;
@@ -94,7 +94,7 @@ exports.misReservas = async (req, res) => {
           include: ['Cancha']
         },
         {
-          association: 'Resena', // 👈 IMPORTANTE para mostrar reseñas
+          association: 'Resena', //  IMPORTANTE para mostrar reseñas
           include: ['Usuario']
         }
       ],
@@ -103,7 +103,7 @@ exports.misReservas = async (req, res) => {
 
     res.render('cliente/mis-reservas', {
       reservas,
-      query: req.query, // 🔥 CLAVE PARA ALERTAS
+      query: req.query, //  CLAVE PARA ALERTAS
       usuario: {
         id: req.session.usuarioId,
         nombre: req.session.usuarioNombre,

@@ -3,14 +3,14 @@ require('dotenv').config();
 
 // Configuración de la conexión
 const sequelize = new Sequelize(
-  process.env.DB_NAME, // Nombre de la base de datos
-  process.env.DB_USER, // Usuario (ej: root)
-  process.env.DB_PASS, // Contraseña
+  process.env.DB_NAME, 
+  process.env.DB_USER, 
+  process.env.DB_PASS, 
   {
     host: process.env.DB_HOST,
     port: 3307,
-    dialect: 'mysql', // O 'postgres', 'sqlite', etc.
-    logging: false    // Para que no llene la consola de SQL
+    dialect: 'mysql', 
+    logging: false    
   }
 );
 

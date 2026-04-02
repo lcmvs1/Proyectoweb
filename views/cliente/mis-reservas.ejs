@@ -2,7 +2,6 @@
 
     <div class="container mt-4">
 
-        <!-- 🔔 ALERTAS -->
         <% if (query && query.error) { %>
             <div class="alert alert-danger">
                 <%= query.error %>
@@ -53,7 +52,6 @@
 
                                         <td class="acciones">
 
-                                            <!-- CANCELAR -->
                                             <form action="/reserva/cancelar/<%= reserva.id %>" method="POST">
                                                 <button class="btn cancelar">Cancelar</button>
                                             </form>

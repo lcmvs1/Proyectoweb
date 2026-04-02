@@ -41,7 +41,7 @@ router.get('/horarios', async (req, res) => {
 });
 
 
-// 🔥 VER HORARIOS POR CANCHA + FILTRO POR FECHA
+
 router.get('/canchas/:id/horarios', async (req, res) => {
 
     const cancha = await Cancha.findByPk(req.params.id);
@@ -88,7 +88,7 @@ router.get('/canchas/:id/horarios', async (req, res) => {
 });
 
 
-// 🔥 CREAR HORARIO (SOLO ADMIN)
+// CREAR HORARIO (SOLO ADMIN)
 router.post('/horarios', async (req, res) => {
 
     if (req.session.usuarioRol !== 'admin') {
@@ -109,7 +109,7 @@ router.post('/horarios', async (req, res) => {
 });
 
 
-// 🔥 ELIMINAR (SOLO ADMIN)
+// ELIMINAR (SOLO ADMIN)
 router.post('/admin/horarios/eliminar/:id', async (req, res) => {
 
     if (req.session.usuarioRol !== 'admin') {

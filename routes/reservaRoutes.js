@@ -20,21 +20,21 @@ router.post('/reservar/:horario_id', async (req, res) => {
         return res.redirect('/horarios');
     }
 
-    // 🔥 BUSCAR SI YA EXISTE
+    // BUSCAR SI YA EXISTE
     let reserva = await Reserva.findOne({
         where: { horario_id }
     });
 
     if (reserva) {
 
-        // 🔥 SI YA EXISTE → REUTILIZAR
+        // SI YA EXISTE → REUTILIZAR
         reserva.estado = 'confirmada';
         reserva.usuario_id = usuario_id;
         await reserva.save();
 
     } else {
 
-        // 🔥 SI NO EXISTE → CREAR
+        // SI NO EXISTE → CREAR
         await Reserva.create({
             usuario_id,
             horario_id,

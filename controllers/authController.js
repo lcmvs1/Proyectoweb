@@ -6,7 +6,7 @@ exports.registrar = async (req, res) => {
     try {
         const { nombre, email, contrasena } = req.body;
 
-        // 1. Encriptar la contraseña (seguridad ante todo)
+        // 1. Encriptar la contraseña 
         const hash = await bcrypt.hash(contrasena, 10);
 
         // 2. Guardar en la base de datos
@@ -50,7 +50,7 @@ exports.iniciarSesion = async (req, res) => {
             });
         }
 
-        // 👇 IMPORTANTE: este solo se ejecuta si falla login
+        //solo se ejecuta si falla login
         return res.render('login', { error: 'Correo o contraseña incorrectos.' });
     } catch (error) {
         console.error(error);

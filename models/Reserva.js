@@ -9,7 +9,7 @@ const Reserva = sequelize.define('Reserva', {
   horario_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    unique: true // 🔥 evita duplicados
+    unique: true //  evita duplicados
   }
 }, {
   tableName: 'reservas'
