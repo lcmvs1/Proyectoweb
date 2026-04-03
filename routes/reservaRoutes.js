@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
 const reservaController = require('../controllers/reservaController');
+
 router.get('/cliente/mis-reservas', reservaController.misReservas);
 router.get('/reserva/:horario_id', reservaController.reservar);
 router.post('/reserva/cancelar/:id', reservaController.cancelar);
@@ -20,24 +20,20 @@ router.post('/reservar/:horario_id', async (req, res) => {
         return res.redirect('/horarios');
     }
 
-    // BUSCAR SI YA EXISTE
     let reserva = await Reserva.findOne({
         where: { horario_id }
     });
 
     if (reserva) {
-
-        // SI YA EXISTE → REUTILIZAR
         reserva.estado = 'confirmada';
         reserva.usuario_id = usuario_id;
         await reserva.save();
 
     } else {
 
-        // SI NO EXISTE → CREAR
         await Reserva.create({
             usuario_id,
-            horario_id,
+            horario_id, 
             estado: 'confirmada'
         });
     }

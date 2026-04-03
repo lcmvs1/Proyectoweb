@@ -2,7 +2,7 @@ const Reserva = require('../models/Reserva');
 const Horario = require('../models/Horario');
 const Resena = require('../models/Resena');
 
-//  RESERVAR
+
 exports.reservar = async (req, res) => {
   try {
     const usuario_id = req.session.usuarioId;

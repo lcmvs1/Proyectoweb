@@ -3,7 +3,6 @@ const Reserva = require('../models/Reserva');
 const Horario = require('../models/Horario');
 
 
-//  CREAR RESEÑA
 exports.crearResena = async (req, res) => {
 
   const { cancha_id, reserva_id, calificacion, comentario } = req.body;
@@ -15,7 +14,7 @@ exports.crearResena = async (req, res) => {
       include: [Horario]
     });
 
-    // No existe
+  
     if (!reserva) {
       return res.redirect('/cliente/mis-reservas?error=Reserva no encontrada');
     }
@@ -35,7 +34,6 @@ exports.crearResena = async (req, res) => {
 
     const finTurno = new Date(`${fechaISO}T${horaFin}`);
 
-    //  Ya reseñado
     const yaExiste = await Resena.findOne({
       where: { reserva_id }
     });
@@ -44,12 +42,10 @@ exports.crearResena = async (req, res) => {
       return res.redirect('/cliente/mis-reservas?error=Ya reseñaste esta reserva');
     }
 
-    //  Turno no pasó
     if (ahora < finTurno) {
       return res.redirect('/cliente/mis-reservas?error=No puedes reseñar un turno que no ha pasado');
     }
 
-    //  Crear reseña
     await Resena.create({
       calificacion,
       comentario,

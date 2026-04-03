@@ -1,11 +1,11 @@
-/* ===== BASE ===== */
+
 body {
     background: #0a0a0a;
     color: #f8fafc;
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* ===== NAVBAR ===== */
+
 .navbar {
     background: #000 !important;
 }
@@ -19,17 +19,19 @@ body {
     color: #a3e635 !important;
 }
 
-/* ===== TITULOS ===== */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-weight: 700;
     color: #a3e635;
 }
 
-h4, h5 {
+h4,
+h5 {
     color: #f8fafc;
 }
 
-/* ===== CARDS ===== */
+
 .card {
     background: #111;
     border: 1px solid #1f2937;
@@ -43,7 +45,6 @@ h4, h5 {
     box-shadow: 0 10px 30px rgba(163, 230, 53, 0.2);
 }
 
-/* ===== FORM ===== */
 .form-control,
 .form-select {
     background: #000;
@@ -62,9 +63,7 @@ h4, h5 {
     box-shadow: 0 0 8px #a3e635;
 }
 
-/* ===== BOTONES ===== */
 
-/* VERDE FITNESS */
 .btn-success {
     background: linear-gradient(45deg, #84cc16, #a3e635);
     border: none;
@@ -80,7 +79,7 @@ h4, h5 {
     background: linear-gradient(45deg, #65a30d, #84cc16);
 }
 
-/* NEGRO PRO */
+
 .btn-dark {
     background: #000;
     color: #fff;
@@ -93,7 +92,7 @@ h4, h5 {
     color: #000;
 }
 
-/* ELIMINAR */
+
 .btn-danger {
     background: #ef4444;
     border: none;
@@ -111,7 +110,7 @@ h4, h5 {
 
 .table td {
     color: #3c4452 !important;
-    
+
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
@@ -122,7 +121,7 @@ h4, h5 {
     background: #1a1a1a;
 }
 
-/* ===== BADGES ===== */
+
 .badge.bg-success {
     background: #84cc16 !important;
     color: #ffffff;
@@ -132,13 +131,13 @@ h4, h5 {
     background: #ef4444 !important;
 }
 
-/* ===== SOMBRAS ===== */
+
 .shadow {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.6) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) !important;
 }
 
 .shadow-lg {
-    box-shadow: 0 10px 40px rgba(0,0,0,0.8) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8) !important;
 }
 
 
@@ -161,24 +160,24 @@ h4, h5 {
     align-items: center;
 }
 
-/* CONTENEDOR */
+
 .login-container {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-/* CARD */
+
 .login-card {
     background: #111;
     padding: 40px;
     border-radius: 16px;
     width: 350px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
     border: 1px solid #1f2937;
 }
 
-/* TITULO */
+
 .login-title {
     text-align: center;
     color: #a3e635;
@@ -186,7 +185,7 @@ h4, h5 {
     font-weight: bold;
 }
 
-/* INPUTS */
+
 .login-card .form-control {
     background: #000;
     border: 1px solid #374151;
@@ -198,7 +197,7 @@ h4, h5 {
     box-shadow: 0 0 8px #a3e635;
 }
 
-/* LINK */
+
 .login-card a {
     color: #a3e635;
     text-decoration: none;
@@ -213,74 +212,74 @@ h4, h5 {
 }
 
 .titulo {
-  color: #4CAF50;
-  font-weight: bold;
+    color: #4CAF50;
+    font-weight: bold;
 }
 
 .tabla-reservas {
-  width: 100%;
-  border-collapse: collapse;
-  background: #1e1e1e;
-  border-radius: 10px;
-  overflow: hidden;
+    width: 100%;
+    border-collapse: collapse;
+    background: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .tabla-reservas th {
-  background: #2c2c2c;
-  color: #fff;
-  padding: 12px;
+    background: #2c2c2c;
+    color: #fff;
+    padding: 12px;
 }
 
 .tabla-reservas td {
-  padding: 12px;
-  color: #ddd;
-  text-align: center;
+    padding: 12px;
+    color: #ddd;
+    text-align: center;
 }
 
 .tabla-reservas tr {
-  border-bottom: 1px solid #333;
+    border-bottom: 1px solid #333;
 }
 
 .tabla-reservas tr:hover {
-  background: #2a2a2a;
+    background: #2a2a2a;
 }
 
 /* Estados */
 .estado {
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
 }
 
 .estado.confirmada {
-  background: #4CAF50;
-  color: white;
+    background: #4CAF50;
+    color: white;
 }
 
 .estado.cancelada {
-  background: #f44336;
-  color: white;
+    background: #f44336;
+    color: white;
 }
 
-/* Botones */
+
 .btn {
-  padding: 6px 10px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 12px;
-  margin: 2px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 12px;
+    margin: 2px;
 }
 
 .btn.cancelar {
-  background: #ff4d4d;
-  color: white;
+    background: #ff4d4d;
+    color: white;
 }
 
 .btn.resena {
-  background: #00bcd4;
-  color: white;
+    background: #00bcd4;
+    color: white;
 }
 
 .btn:hover {
-  opacity: 0.8;
+    opacity: 0.8;
 }

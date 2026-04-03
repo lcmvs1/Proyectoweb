@@ -6,8 +6,8 @@ exports.verCanchas = async (req, res) => {
     res.render('cliente/listado', { canchas });
 };
 exports.verDisponibilidad = async (req, res) => {
-    const { id } = req.params; // cancha
-    const { fecha } = req.query; //  NUEVO
+    const { id } = req.params;
+    const { fecha } = req.query; 
 
     let where = {
         cancha_id: id,
